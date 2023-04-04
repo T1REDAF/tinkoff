@@ -43,7 +43,10 @@ public class TinkoffBot extends AbilityBot {
                 .name("start")
                 .locality(ALL)
                 .privacy(PUBLIC)
-                .action(ctx ->{ silent.send(responseService.startResponse(user,ctx.chatId()), ctx.chatId());
+                .action(ctx ->{
+                    user = new User(ctx.chatId().intValue(),null,"newer",new int[5]);
+                    user.links=new ArrayList<>();
+                    silent.send(responseService.startResponse(user,ctx.chatId()), ctx.chatId());
                 })
                 .build();
     }
@@ -54,7 +57,7 @@ public class TinkoffBot extends AbilityBot {
                 .locality(ALL)
                 .privacy(PUBLIC)
                 .action(ctx -> silent.send("God will help you😇" +
-                        "Joke\ncommand track - will set your link, untrack - unset, list - get your all links", ctx.chatId()))
+                        "Joke\ncommand track + link - will set your link, untrack - unset, list - get your all links", ctx.chatId()))
                 .build();
     }
     public Ability trackCommand() {
