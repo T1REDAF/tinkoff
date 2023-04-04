@@ -1,4 +1,6 @@
 app:
+  scheduler:
+    interval: 5000
   test: hello-scrapper
 server:
   port: 8080

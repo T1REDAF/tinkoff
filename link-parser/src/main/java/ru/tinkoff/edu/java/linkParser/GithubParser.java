@@ -17,8 +17,8 @@ public class GithubParser extends BaseParser {
                         .filter(part -> !part.isEmpty())
                         .toArray(String[]::new);
             }
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            return new String[]{""};
         }
         return parseNext(link);
     }

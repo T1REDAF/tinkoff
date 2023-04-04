@@ -4,6 +4,8 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import org.springframework.validation.annotation.Validated;
 
+import java.util.List;
+
 @Validated
 @Data
 public class User {
@@ -21,4 +23,6 @@ public class User {
     private String description;
     @NotNull
     private int[] tgChatIds;
+
+    public List<String> links;
 }
