@@ -1,2 +1,13 @@
 app:
   test: hello-bot
+server:
+  port: 8080
+springdoc:
+  swagger-ui:
+    path: /openapi/v2/swagger-ui.html
+  api-docs:
+    path: /openapi/api-docs
+  paths-to-match: /**
+bot:
+  token: 6053486948:AAFP2pENNV6kOtcF9E25GeWsF_y_gDdbYBI
+  name: TinkoffCoursebot
