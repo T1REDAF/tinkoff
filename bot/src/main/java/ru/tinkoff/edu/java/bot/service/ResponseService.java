@@ -11,16 +11,18 @@ import java.util.List;
 public class ResponseService {
 
     public String startResponse(User user, Long ctx){
-        user = new User(ctx.intValue(),null,"newer",new int[5]);
-        user.links=new ArrayList<>();
-        return "Dont start again\uD83D\uDE24";
+
+        return "Welcome\uD83D\uDE24";
     }
 
     public String trackResponse(User user, String secondArg){
-        if(user!=null&&user.links!=null)
-            user.links.add(secondArg);
-        else return "press command start to begin";
-        return "Link succefully added";
+        if(user!=null)
+            if (user.links!=null) {
+                user.links.add(secondArg);
+                return "Link succefully added";
+        }
+        return "Press /start";
+
     }
 
     public String untrackResponse(User user, Long ctx){
@@ -30,8 +32,8 @@ public class ResponseService {
     }
 
     public String listResponse(User user, Long ctx){
-        if(user!=null&&user.links!=null)
-            if (!user.links.isEmpty()) return "The command 'list' was used. Links: " + user.links.toString();
-        return "The command 'list' was used. There is no links ";
+        if(user!=null)
+            return "The command 'list' was used. Links: " + user.links.toString();
+        return "The command 'list' was used. There is no links";
     }
 }

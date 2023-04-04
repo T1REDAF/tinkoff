@@ -25,10 +25,11 @@ public class TinkoffBotTest {
 
     @Test
     public void ListExistsResponseTest(){
-        User newUser = new User(1,"123","33",null);
+        User newUser = new User(1,null,"newer",new int[5]);
         newUser.links=new ArrayList<>();
         newUser.links.add("fwe");
         newUser.links.add("mge");
+        responseService.startResponse(newUser,1l);
         String check = responseService.listResponse(newUser,123l);
 
         Assert.assertEquals("The command 'list' was used. Links: [fwe, mge]",check);
