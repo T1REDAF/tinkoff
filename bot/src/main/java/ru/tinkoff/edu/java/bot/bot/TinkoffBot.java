@@ -5,31 +5,27 @@ import org.springframework.stereotype.Component;
 import org.telegram.abilitybots.api.bot.AbilityBot;
 import org.telegram.abilitybots.api.bot.BaseAbilityBot;
 import org.telegram.abilitybots.api.objects.Ability;
-import org.telegram.abilitybots.api.objects.Flag;
 import org.telegram.abilitybots.api.objects.Reply;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import ru.tinkoff.edu.java.bot.dto.User;
+import ru.tinkoff.edu.java.bot.service.ResponseService;
 
 import static org.telegram.abilitybots.api.util.AbilityUtils.getChatId;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 import static org.telegram.abilitybots.api.objects.Locality.ALL;
 import static org.telegram.abilitybots.api.objects.Privacy.PUBLIC;
-import static org.telegram.abilitybots.api.util.AbilityUtils.getChatId;
 
 @Component
 public class TinkoffBot extends AbilityBot {
     private User user;
+    private ResponseService responseService;
     public Reply sayYuckOnImage() {
         // getChatId is a public utility function in rg.telegram.abilitybots.api.util.AbilityUtils
         BiConsumer<BaseAbilityBot,Update> action = (bot,upd) -> silent.send("Invalid command", getChatId(upd));
-
-
         return Reply.of(action, hasText());
     }
 
@@ -47,9 +43,7 @@ public class TinkoffBot extends AbilityBot {
                 .name("start")
                 .locality(ALL)
                 .privacy(PUBLIC)
-                .action(ctx ->{ silent.send("Dont start again😤", ctx.chatId());
-                    user = new User(ctx.chatId().intValue(),null,"newer",new int[5]);
-                    user.links=new ArrayList<>();
+                .action(ctx ->{ silent.send(responseService.startResponse(user,ctx.chatId()), ctx.chatId());
                 })
                 .build();
     }
@@ -69,8 +63,8 @@ public class TinkoffBot extends AbilityBot {
                 .name("track")
                 .locality(ALL)
                 .privacy(PUBLIC)
-                .action(ctx -> {silent.send("The command 'track' was used. My man..", ctx.chatId());
-                    user.links.add(ctx.secondArg());
+                .action(ctx -> {silent.send(responseService.trackResponse(user,ctx.secondArg()), ctx.chatId());
+
                 })
                 .build();
     }
@@ -92,9 +86,8 @@ public class TinkoffBot extends AbilityBot {
                 .locality(ALL)
                 .privacy(PUBLIC)
                 .action(ctx -> {
-                    if (!user.links.isEmpty())
-                        silent.send("The command 'list' was used. Links: " + user.links.toString(), ctx.chatId());
-                    else silent.send("The command 'list' was used. There is no links ", ctx.chatId());
+                        silent.send(responseService.listResponse(user,ctx.chatId()), ctx.chatId());
+
 
                 })
                 .build();
@@ -106,9 +99,10 @@ public class TinkoffBot extends AbilityBot {
         return 0;
     }
 
-    protected TinkoffBot(@Value("${bot.token}") String botToken,
-                      @Value("${bot.name}") String botName)
+    public TinkoffBot(@Value("${bot.token}") String botToken,
+                         @Value("${bot.name}") String botName, ResponseService responseService)
     {
         super(botToken, botName);
+        this.responseService = responseService;
     }
 }
