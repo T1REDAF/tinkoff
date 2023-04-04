@@ -8,7 +8,12 @@ import org.telegram.abilitybots.api.objects.Ability;
 import org.telegram.abilitybots.api.objects.Flag;
 import org.telegram.abilitybots.api.objects.Reply;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import ru.tinkoff.edu.java.bot.dto.User;
+
 import static org.telegram.abilitybots.api.util.AbilityUtils.getChatId;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -19,9 +24,10 @@ import static org.telegram.abilitybots.api.util.AbilityUtils.getChatId;
 
 @Component
 public class TinkoffBot extends AbilityBot {
+    private User user;
     public Reply sayYuckOnImage() {
         // getChatId is a public utility function in rg.telegram.abilitybots.api.util.AbilityUtils
-        BiConsumer<BaseAbilityBot,Update> action = (bot,upd) -> silent.send("Wrong", getChatId(upd));
+        BiConsumer<BaseAbilityBot,Update> action = (bot,upd) -> silent.send("Invalid command", getChatId(upd));
 
 
         return Reply.of(action, hasText());
@@ -41,7 +47,10 @@ public class TinkoffBot extends AbilityBot {
                 .name("start")
                 .locality(ALL)
                 .privacy(PUBLIC)
-                .action(ctx -> silent.send("Dont start again😤", ctx.chatId()))
+                .action(ctx ->{ silent.send("Dont start again😤", ctx.chatId());
+                    user = new User(ctx.chatId().intValue(),null,"newer",new int[5]);
+                    user.links=new ArrayList<>();
+                })
                 .build();
     }
     public Ability helpCommand() {
@@ -50,7 +59,8 @@ public class TinkoffBot extends AbilityBot {
                 .name("help")
                 .locality(ALL)
                 .privacy(PUBLIC)
-                .action(ctx -> silent.send("God will help you😇", ctx.chatId()))
+                .action(ctx -> silent.send("God will help you😇" +
+                        "Joke\ncommand track - will set your link, untrack - unset, list - get your all links", ctx.chatId()))
                 .build();
     }
     public Ability trackCommand() {
@@ -59,7 +69,9 @@ public class TinkoffBot extends AbilityBot {
                 .name("track")
                 .locality(ALL)
                 .privacy(PUBLIC)
-                .action(ctx -> silent.send("The command 'track' was used. My man..", ctx.chatId()))
+                .action(ctx -> {silent.send("The command 'track' was used. My man..", ctx.chatId());
+                    user.links.add(ctx.secondArg());
+                })
                 .build();
     }
     public Ability untrackCommand() {
@@ -68,7 +80,9 @@ public class TinkoffBot extends AbilityBot {
                 .name("untrack")
                 .locality(ALL)
                 .privacy(PUBLIC)
-                .action(ctx -> silent.send("Ohhh... no... The command 'untrack' was used!", ctx.chatId()))
+                .action(ctx -> {silent.send("Ohhh... no... The command 'untrack' was used!", ctx.chatId());
+                    //todo сделать реализацию
+                })
                 .build();
     }
     public Ability listCommand() {
@@ -77,7 +91,12 @@ public class TinkoffBot extends AbilityBot {
                 .name("list")
                 .locality(ALL)
                 .privacy(PUBLIC)
-                .action(ctx -> silent.send("The command 'list' was used. That's real sh*t", ctx.chatId()))
+                .action(ctx -> {
+                    if (!user.links.isEmpty())
+                        silent.send("The command 'list' was used. Links: " + user.links.toString(), ctx.chatId());
+                    else silent.send("The command 'list' was used. There is no links ", ctx.chatId());
+
+                })
                 .build();
     }
 

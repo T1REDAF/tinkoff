@@ -17,6 +17,6 @@ public class StackOverflowParser extends BaseParser {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        return parseNext(link);
+        return new String[]{""};
     }
 }

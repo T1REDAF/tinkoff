@@ -9,5 +9,5 @@ springdoc:
     path: /openapi/api-docs
   paths-to-match: /**
 bot:
-  token: Свой токен
+  token: 6053486948:AAFP2pENNV6kOtcF9E25GeWsF_y_gDdbYBI
   name: TinkoffCoursebot
