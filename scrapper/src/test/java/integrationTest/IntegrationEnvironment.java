@@ -19,7 +19,7 @@ public class IntegrationEnvironment {
     static final PostgreSQLContainer CONTAINER;
 
     static {
-        CONTAINER = (PostgreSQLContainer) new PostgreSQLContainer("postgres:15")
+        CONTAINER = (PostgreSQLContainer) new PostgreSQLContainer("postgres:14")
                 .withDatabaseName("scrapper")
                 .withUsername("postgres")
                 .withPassword("1234")
