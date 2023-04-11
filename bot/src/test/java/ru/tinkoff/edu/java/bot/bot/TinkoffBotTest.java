@@ -39,6 +39,6 @@ public class TinkoffBotTest {
         User newUser = new User(1,"123","33",null);
         String check = responseService.listResponse(newUser,123l);
 
-        Assert.assertEquals("The command 'list' was used. There is no links ",check);
+        Assert.assertEquals("The command 'list' was used. There is no links",check);
     }
 }

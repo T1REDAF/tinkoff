@@ -32,7 +32,7 @@ public class ResponseService {
     }
 
     public String listResponse(User user, Long ctx){
-        if(user!=null)
+        if(user!=null&&user.links!=null)
             return "The command 'list' was used. Links: " + user.links.toString();
         return "The command 'list' was used. There is no links";
     }
