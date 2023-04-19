@@ -1,8 +1,3 @@
-package ru.tinkoff.edu.java.scrapper.dto;
+package ru.tinkoff.edu.java.scrapper.DTO;
 
-import jakarta.validation.constraints.NotNull;
-
-import java.net.URI;
-
-public record LinkResponse(@NotNull int id,@NotNull URI url) {
-}
+public record LinkResponse(long id, String url) {}
