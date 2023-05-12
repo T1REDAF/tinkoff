@@ -8,7 +8,6 @@ import ru.tinkoff.edu.java.scrapper.repository.mapper.LinkMapper;
 import java.sql.Timestamp;
 import java.util.List;
 
-@Repository
 public class LinkJdbcRepository {
 
     private final JdbcTemplate jdbcTemplate;
@@ -43,6 +42,7 @@ public class LinkJdbcRepository {
     }
 
     public void update(Link link){
-
+        jdbcTemplate.update("update link set update = ? where id = ?",
+                link.getUpdate(), link.getId());
     }
 }

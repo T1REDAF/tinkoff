@@ -23,7 +23,6 @@ import java.net.URISyntaxException;
 import java.sql.Timestamp;
 import java.util.List;
 
-@Service
 public class JdbcLinkUpdaterService implements LinkUpdater {
 
     private Long time = 10000000L;

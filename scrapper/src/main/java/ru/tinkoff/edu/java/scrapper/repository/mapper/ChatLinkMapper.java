@@ -7,7 +7,7 @@ import ru.tinkoff.edu.java.scrapper.Model.ChatLink;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-@Component
+
 public class ChatLinkMapper implements RowMapper<ChatLink> {
     @Override
     public ChatLink mapRow(ResultSet rs, int rowNum) throws SQLException {

@@ -12,7 +12,6 @@ import ru.tinkoff.edu.java.scrapper.repository.mapper.LinkMapper;
 
 import java.util.List;
 
-@Repository
 public class ChatLinkJdbcRepository {
 
     private final JdbcTemplate jdbcTemplate;
