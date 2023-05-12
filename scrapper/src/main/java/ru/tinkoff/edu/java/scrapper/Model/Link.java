@@ -3,6 +3,7 @@ package ru.tinkoff.edu.java.scrapper.Model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.tinkoff.edu.java.scrapper.Model.Jpa.LinkJpa;
 
 import java.sql.Timestamp;
 
@@ -22,5 +23,11 @@ public class Link {
     public Link(String url, Timestamp update) {
         this.url = url;
         this.update = update;
+    }
+
+    public Link(LinkJpa linkJpa){
+        this.id = linkJpa.getId();
+        this.url = linkJpa.getUrl();
+        this.update = linkJpa.getUpdate();
     }
 }
