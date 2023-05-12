@@ -1,4 +1,6 @@
+
 package IntegrationTest;
+
 
 import liquibase.Contexts;
 import liquibase.LabelExpression;
@@ -9,6 +11,9 @@ import liquibase.database.jvm.JdbcConnection;
 import liquibase.resource.DirectoryResourceAccessor;
 import org.testcontainers.containers.PostgreSQLContainer;
 
+import org.testcontainers.junit.jupiter.Testcontainers;
+
+
 import java.io.File;
 import java.nio.file.Path;
 import java.sql.Connection;
@@ -18,7 +23,9 @@ public class IntegrationEnvironment {
     static final PostgreSQLContainer CONTAINER;
 
     static {
+
         CONTAINER = (PostgreSQLContainer) new PostgreSQLContainer("postgres:15")
+
                 .withDatabaseName("scrapper")
                 .withUsername("postgres")
                 .withPassword("1234")
@@ -34,4 +41,7 @@ public class IntegrationEnvironment {
             e.printStackTrace();
         }
     }
+
 }
+
+

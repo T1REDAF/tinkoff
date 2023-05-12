@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--suppress XmlUnusedNamespaceDeclaration -->
 <databaseChangeLog
+
    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
@@ -13,3 +14,4 @@
     <include file="02-schema-2.sql"/>
     <include file="03-schema-3.sql"/>
 </databaseChangeLog>
+
