@@ -11,7 +11,6 @@ import java.net.URI;
 import java.sql.Timestamp;
 import java.util.List;
 
-@Service
 public class JdbcLinkService implements LinkService {
 
     private final LinkJdbcRepository linkJdbcRepository;

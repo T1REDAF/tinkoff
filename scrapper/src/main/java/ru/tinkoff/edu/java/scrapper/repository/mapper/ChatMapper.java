@@ -7,7 +7,7 @@ import ru.tinkoff.edu.java.scrapper.Model.Chat;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-@Component
+
 public class ChatMapper implements RowMapper<Chat> {
     @Override
     public Chat mapRow(ResultSet rs, int rowNum) throws SQLException {

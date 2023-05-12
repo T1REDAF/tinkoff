@@ -8,7 +8,6 @@ import ru.tinkoff.edu.java.scrapper.repository.mapper.ChatMapper;
 
 import java.util.List;
 
-@Repository
 public class ChatJdbcRepository{
 
     private final JdbcTemplate jdbcTemplate;
@@ -24,8 +23,7 @@ public class ChatJdbcRepository{
         return jdbcTemplate.query("select * from chat", chatMapper);
     }
 
-    public void add(Chat chat){
-        jdbcTemplate.update("insert into chat (chat_id, name) values(?, ?)", chat.getChat_id(), chat.getName());
+    public void add(Chat chat){jdbcTemplate.update("insert into chat (chat_id, name) values(?, ?)", chat.getChat_id(), chat.getName());
     }
 
     public void remove(Long id){
